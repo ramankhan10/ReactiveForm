@@ -4,9 +4,20 @@
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <div class="form-group mt-3">
           <label for="username">Username</label>
-          <input type="text" id="username"
-          formControlName="username"
-          class="form-control" />
+          <input
+            type="text"
+            id="username"
+            formControlName="username"
+            class="form-control"
+          />
+          <span
+            class="text-danger"
+            *ngIf="
+              !signupForm.get('username')!.valid &&
+              signupForm.get('username')!.touched
+            "
+            >Please enter a valid username!</span
+          >
         </div>
         <div class="form-group mt-3">
           <label for="email">email</label>
@@ -16,6 +27,15 @@
             formControlName="email"
             class="form-control"
           />
+
+          <span
+            class="text-danger"
+            *ngIf="
+              !signupForm.get('email')!.valid &&
+              signupForm.get('email')!.touched
+            "
+            >Please enter a valid email!</span
+          >
         </div>
         <div class="radio mt-2" *ngFor="let gender of genders">
           <label>
@@ -24,11 +44,17 @@
             }}
           </label>
         </div>
+
         <button class="btn btn-primary mt-3" type="submit">Submit</button>
+        <br />
+        <span
+          class="text-danger"
+          *ngIf="!signupForm!.valid && signupForm!.touched"
+          >Please enter a valid data!</span
+        >
       </form>
     </div>
   </div>
 </div>
-
 
 <router-outlet></router-outlet>
