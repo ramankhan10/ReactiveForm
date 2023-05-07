@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   title = 'ReactiveForm';
   genders = ['male', 'female'];
 
@@ -14,9 +14,13 @@ export class AppComponent implements OnInit{
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      username: new FormControl(null),
-      email: new FormControl (null),
-      gender: new FormControl('male')
-    })
+      username: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      gender: new FormControl('male'),
+    });
+  }
+
+  onSubmit() {
+    console.log(this.signupForm);
   }
 }
